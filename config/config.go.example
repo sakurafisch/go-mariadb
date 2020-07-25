@@ -1,0 +1,4 @@
+package config
+
+// MariadbPassword is the password of Mariadb
+var MariadbPassword string = "password_of_mariadb"
