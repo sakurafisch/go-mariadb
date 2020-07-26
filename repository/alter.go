@@ -6,8 +6,8 @@ import (
 	"go-mariadb/config"
 )
 
-// Insert a data item to the table of people
-func Insert() {
+// Update table of people
+func Update() {
 	db, err := sql.Open("mysql", "root:"+config.MariadbPassword+"@tcp(localhost:3306)/first")
 	db.Ping()
 	defer func() {
@@ -20,7 +20,7 @@ func Insert() {
 		return
 	}
 
-	stmt, err := db.Prepare("INSERT INTO people VALUES(default,?,?)") // 其中 ? 是占位符
+	stmt, err := db.Prepare("UPDATE people SET name = ? , address = ? WHERE id = ?") // 其中 ? 是占位符
 	defer func() {
 		if stmt != nil {
 			stmt.Close()
@@ -31,7 +31,7 @@ func Insert() {
 		return
 	}
 
-	result, err := stmt.Exec("张三", "海淀")
+	result, err := stmt.Exec("李四", "朝阳", 3)
 	if err != nil {
 		fmt.Println("SQL语句执行失败")
 		return
@@ -44,8 +44,8 @@ func Insert() {
 	}
 
 	if count > 0 {
-		fmt.Println("数据项插入成功")
+		fmt.Println("数据项修改成功")
 	} else {
-		fmt.Println("数据项插入失败")
+		fmt.Println("数据项修改失败")
 	}
 }

@@ -8,5 +8,6 @@ import (
 
 func main() {
 	repository.Insert()
+	repository.Update()
 	repository.Select()
 }
