@@ -9,5 +9,6 @@ import (
 func main() {
 	repository.Insert()
 	repository.Update()
+	repository.Delete()
 	repository.Select()
 }
